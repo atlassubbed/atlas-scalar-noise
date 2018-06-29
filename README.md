@@ -62,14 +62,14 @@ We don't *have* to interpolate our lattice if we don't want to. For example, if 
 ```javascript
 ...
 const Canvas = require("./Canvas");
-const canvas = new Canvas(100, 100)
+const squareCanvas = new Canvas(100, 100)
 
 for (let x = 100; x--;){
   for (let y = 100; y--;){
-    canvas.setPixel(squareGrid.getPixel(x, y))
+    squareCanvas.setPixel(squareGrid.getPixel(x, y))
   }
 }
-canvas.print()
+squareCanvas.print()
 ```
 
 <p align="center">
@@ -94,7 +94,7 @@ for (let x = size; x--;){
     )
   }
 }
-canvas.print()
+squareCanvas.print()
 ```
 
 <p align="center">
@@ -120,7 +120,7 @@ for (let x = size; x--;){
     )
   }
 }
-canvas.print()
+squareCanvas.print()
 ```
 
 <p align="center">
@@ -147,7 +147,7 @@ for (let x = size; x--;){
     )
   }
 }
-canvas.print()
+squareCanvas.print()
 ```
 
 <p align="center">
