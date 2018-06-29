@@ -59,7 +59,7 @@ Once we've generated our grid, we can use that grid to generate noise. The grid 
 
 We don't *have* to interpolate our lattice if we don't want to. For example, if we only get pixels at exactly the grid lattice points, we will end up with regular noise, with the output image being identical to the grid:
 
-```
+```javascript
 ...
 const Canvas = require("./Canvas");
 const canvas = new Canvas(100, 100)
