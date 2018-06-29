@@ -88,7 +88,7 @@ const size = 400;
 const scaleFactor = 4;
 const squareCanvas = new Canvas(size, size);
 for (let x = size; x--;){
-  for (let y = size; x--;){
+  for (let y = size; y--;){
     squareCanvas.setPixel(
       squareGrid.getPixel(x/scaleFactor,y/scaleFactor)
     )
@@ -114,7 +114,7 @@ const size = 400;
 const scaleFactor = 40;
 const squareCanvas = new Canvas(size, size);
 for (let x = size; x--;){
-  for (let y = size; x--;){
+  for (let y = size; y--;){
     squareCanvas.setPixel(
       smallSquareGrid.getPixel(x/scaleFactor,y/scaleFactor)
     )
@@ -141,7 +141,7 @@ const size = 400;
 const scaleFactor = 10;
 const squareCanvas = new Canvas(size, size);
 for (let x = size; x--;){
-  for (let y = size; x--;){
+  for (let y = size; y--;){
     squareCanvas.setPixel(
       smallSquareGrid.getPixel(x/scaleFactor,y/scaleFactor)
     )
