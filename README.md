@@ -23,7 +23,7 @@ Value noise is pretty simple to understand:
   1. Generate a rectangular grid of random numbers between 0 and 1.
   2. Interpolate between the lattice points so that transitions between their values are smooth.
 
-For example, if I generate two adjacent random numbers `[.51, .42]`, plotting them next to each other will result in a discontinuous-looking step. I might want to smooth the transition with 2 intermediate values: `[.51, .48, .45, .42]`. We can generalize this simple, one-dimensional example to `N` dimensions, but for now we'll stick with two dimensions.
+For example, if I generate two adjacent random numbers `[.51, .42]`, plotting them next to each other will result in a discontinuous-looking step (`delta = .09`). I might want to smooth the transition with 2 intermediate values: `[.51, .48, .45, .42]`. In this interpolation, our `delta = .03`, which is smaller, making the values appear closer together. We can generalize this simple, one-dimensional example to `N` dimensions, but for now we'll stick with two dimensions.
 
 ## examples
 
