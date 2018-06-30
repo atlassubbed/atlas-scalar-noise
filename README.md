@@ -254,6 +254,20 @@ squareCanvas.print()
   <img alt="Using value noise to generate an atomic lattice picture. Grid sizes: 2x2, 400x400, Canvas Size: 400x400, Scale Factors: 20x20, 1x1" src="docs/atomic_lattice.png">
 </p>
 
+#### other notable examples
+
+If you play around enough with value noise, you can stumble upon some pretty interesting textures. For example, this value noise looks a lot like stacked metal springs or staples:
+
+<p align="center">
+  <img alt="Image of metal created with value noise" src="docs/metal_springs.png">
+</p>
+
+If you added some color, this example would look a lot like a rug pattern:
+
+<p align="center">
+  <img alt="Image of patterned rug created with value noise" src="docs/rug.png">
+</p>
+
 By now, hopefully it's clear how useful value noise can be for generating digital artwork and other graphics.
 
 ## caveats 
