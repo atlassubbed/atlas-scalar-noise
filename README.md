@@ -203,7 +203,7 @@ Let's copy the example above, but instead use a different random grid for each o
 
 ```javascript
 ...
-const makeGrid = () => new Grid(10)
+const makeGrid = () => new ScalarNoiseGenerator(10)
 const size = 400;
 const scaleFactors = [200, 100, 50, 20, 12, 8, 6, 4];
 const grids = Array(scaleFactors.length).fill().map(makeGrid)
@@ -228,6 +228,31 @@ squareCanvas.print()
 
 Overall, there seem to be fewer artifacts when using unique grids for each frequency component.
 
+#### scanning tunnelling microscopy
+
+In our final example, we'll use value noise to generate a picture which looks a lot like a picture of an atomic lattice:
+
+```javascript
+...
+const size = 400;
+const quantumNoise = new ScalarNoiseGenerator(size)
+const atomicLattice = new ScalarNoiseGenerator(2)
+const squareCanvas = new Canvas(size, size);
+const scaleFactor = 10;
+
+for (let x = size; x--;){
+  for (let y = size; y--;){
+    const noiseValue = .1 * quantumNoise.getPixel(x,y) +
+      .9 * atomicLattice.getPixel(x/scaleFactor, y/scaleFactor)
+    squareCanvas.setPixel(255 * noiseValue)
+  }
+}
+squareCanvas.print()
+```
+
+<p align="center">
+  <img alt="Using value noise to generate an atomic lattice picture. Grid sizes: 2x2, 400x400, Canvas Size: 400x400, Scale Factors: 20x20, 1x1" src="docs/atomic_lattice.png">
+</p>
 
 ## caveats 
 
