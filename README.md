@@ -165,7 +165,7 @@ This tesselation is useful when you want to try and create repeating patterns fr
 
 Now that we understand how to generate value noise, let's create a gas cloud. First, let's understand what a frequency spectrum is. You can represent a continuous function (like an image) as a sum of various frequencies -- when you generate value noise with lots of interpolation points (like in our third example), you'll end up with larger features, signifying *lower* frequencies. If you use fewer interpolation points (like in our first couple of examples), you'll end up with very fine-grained features, signifying *higher* frequencies.
 
-Fractal noise is where you reduce contributions from higher frequency signals according to a power law, as opposed to white noise which has a uniform contribution from all frequencies. In this example, we'll use the same grid to the generate the final image fractal, but you could also use different grids to avoid potential artifacts:
+Fractal noise is where you reduce contributions from higher frequency signals according to a power law, as opposed to white noise which has a uniform contribution from all frequencies. In this example, we'll use the same grid to generate the final image fractal, but you could also use different grids to avoid potential artifacts:
 
 ```javascript
 ...
