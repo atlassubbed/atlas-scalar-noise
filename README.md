@@ -66,7 +66,8 @@ const squareCanvas = new Canvas(100, 100)
 
 for (let x = 100; x--;){
   for (let y = 100; y--;){
-    squareCanvas.setPixel(squareGrid.getPixel(x, y))
+    // multiply noise value 255 to set greyscale val between 0 and 255
+    squareCanvas.setPixel(255 * squareGrid.getPixel(x, y))
   }
 }
 squareCanvas.print()
@@ -90,7 +91,7 @@ const squareCanvas = new Canvas(size, size);
 for (let x = size; x--;){
   for (let y = size; y--;){
     squareCanvas.setPixel(
-      squareGrid.getPixel(x/scaleFactor,y/scaleFactor)
+      255 * squareGrid.getPixel(x/scaleFactor,y/scaleFactor)
     )
   }
 }
@@ -116,7 +117,7 @@ const squareCanvas = new Canvas(size, size);
 for (let x = size; x--;){
   for (let y = size; y--;){
     squareCanvas.setPixel(
-      smallSquareGrid.getPixel(x/scaleFactor,y/scaleFactor)
+      255 * smallSquareGrid.getPixel(x/scaleFactor,y/scaleFactor)
     )
   }
 }
@@ -143,7 +144,7 @@ const squareCanvas = new Canvas(size, size);
 for (let x = size; x--;){
   for (let y = size; y--;){
     squareCanvas.setPixel(
-      smallSquareGrid.getPixel(x/scaleFactor,y/scaleFactor)
+      255 * smallSquareGrid.getPixel(x/scaleFactor,y/scaleFactor)
     )
   }
 }
@@ -159,6 +160,73 @@ Notice how the noise seems to repeat itself. This is because `ScalarNoiseGenerat
 To understand why this example tesselated, we need to look at our scale factor. It was reduced from `40` to `10` *without* changing our canvas size, meaning the `x` values become: `[0, .1, .2, ..., 39.7, 39.8, 39.9]` for a total of 400 points. This is also true for the `y` values, since our grid is a square. Notice how we almost go up to `40` in both dimensions -- meaning we are "wrapping" around our `10x10` grid three extra times.
 
 This tesselation is useful when you want to try and create repeating patterns from some base grid, or if you want to indefinitely continue noise in some direction.
+
+#### fractal value noise
+
+Now that we understand how to generate value noise, let's create a gas cloud. First, let's understand what a frequency spectrum is. You can represent a continuous function (like an image) as a sum of various frequencies -- when you generate value noise with lots of interpolation points (like in our third example), you'll end up with larger features, signifying *lower* frequencies. If you use fewer interpolation points (like in our first couple of examples), you'll end up with very fine-grained features, signifying *higher* frequencies.
+
+Fractal noise is where you reduce contributions from higher frequency signals according to a power law, as opposed to white noise which has a uniform contribution from all frequencies. In this example, we'll use the same grid to the generate the final image fractal, but you could also use different grids to avoid potential artifacts:
+
+```javascript
+...
+const size = 400;
+// scale factors should add up to 400 
+// so we're not getting an artifically dark image
+const scaleFactors = [200, 100, 50, 20, 12, 8, 6, 4];
+const squareCanvas = new Canvas(size, size);
+
+for (let x = size; x--;){
+  for (let y = size; y--;){
+    const noiseValue = scaleFactors.reduce((p, factor) => {
+      const frequency = size/factor;
+      return p + smallSquareGrid.getPixel(x/factor, y/factor)/frequency
+    }, 0)
+    squareCanvas.setPixel(255 * noiseValue)
+  }
+}
+squareCanvas.print()
+```
+
+<p align="center">
+  <img alt="Image of pink value noise using an inverse power law with alpha=1. Grid size: 10x10, Canvas Size: 400x400, Scale Factors: 200x200, 100x100, 50x50, 20x20, 12x12, 8x8, 6x6, 4x4" src="docs/pink_value_noise.png">
+</p>
+
+This is what pink noise looks like -- it reminds me of the gas in The Elder Scrolls V: Skyrim's main start menu screen. You might notice some strange radial artifacts towards the center. This may be due to using the same grid for each frequency component. You may get unwanted constructive and destructive interference or other linear repetitions as in this example:
+
+<p align="center">
+  <img alt="Image of undesired artifacts in pink value noise using an inverse power law with alpha=1. Grid size: 10x10, Canvas Size: 400x400, Scale Factors: 200x200, 100x100, 50x50, 20x20, 12x12, 8x8, 6x6, 4x4" src="docs/pink_value_noise_interference.png">
+</p>
+
+#### fractal value noise with unique grids
+
+Let's copy the example above, but instead use a different random grid for each of our frequency components:
+
+```javascript
+...
+const makeGrid = () => new Grid(10)
+const size = 400;
+const scaleFactors = [200, 100, 50, 20, 12, 8, 6, 4];
+const grids = Array(scaleFactors.length).fill().map(makeGrid)
+const squareCanvas = new Canvas(size, size);
+
+for (let x = size; x--;){
+  for (let y = size; y--;){
+    const noiseValue = scaleFactors.reduce((p, factor, i) => {
+      const frequency = size/factor;
+      const smallSquareGrid = grids[i];
+      return p + smallSquareGrid.getPixel(x/factor, y/factor)/frequency
+    }, 0)
+    squareCanvas.setPixel(255 * noiseValue)
+  }
+}
+squareCanvas.print()
+```
+
+<p align="center">
+  <img alt="Image of pink value noise using an inverse power law with alpha=1 and unique grids. Grid sizes: 10x10, Canvas Size: 400x400, Scale Factors: 200x200, 100x100, 50x50, 20x20, 12x12, 8x8, 6x6, 4x4" src="docs/pink_value_noise.png">
+</p>
+
+Overall, there seem to be fewer artifacts when using unique grids for each frequency component.
 
 
 ## caveats 
