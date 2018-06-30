@@ -223,7 +223,7 @@ squareCanvas.print()
 ```
 
 <p align="center">
-  <img alt="Image of pink value noise using an inverse power law with alpha=1 and unique grids. Grid sizes: 10x10, Canvas Size: 400x400, Scale Factors: 200x200, 100x100, 50x50, 20x20, 12x12, 8x8, 6x6, 4x4" src="docs/pink_value_noise.png">
+  <img alt="Image of pink value noise using an inverse power law with alpha=1 and unique grids. Grid sizes: 10x10, Canvas Size: 400x400, Scale Factors: 200x200, 100x100, 50x50, 20x20, 12x12, 8x8, 6x6, 4x4" src="docs/pink_value_noise_unique.png">
 </p>
 
 Overall, there seem to be fewer artifacts when using unique grids for each frequency component.
