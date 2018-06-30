@@ -254,6 +254,8 @@ squareCanvas.print()
   <img alt="Using value noise to generate an atomic lattice picture. Grid sizes: 2x2, 400x400, Canvas Size: 400x400, Scale Factors: 20x20, 1x1" src="docs/atomic_lattice.png">
 </p>
 
+By now, hopefully it's clear how easy useful value noise can be for generating digital artwork and other graphics.
+
 ## caveats 
 
 Not fully optimized! For educational purposes and fun.
