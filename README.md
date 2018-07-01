@@ -171,7 +171,7 @@ Fractal noise is where you reduce contributions from higher frequency signals ac
 ...
 const size = 400;
 // scale factors should add up to 400 
-// so we're not getting an artifically dark image
+// so we're not getting an artificially dark image
 const scaleFactors = [200, 100, 50, 20, 12, 8, 6, 4];
 const squareCanvas = new Canvas(size, size);
 

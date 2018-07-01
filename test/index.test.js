@@ -8,7 +8,6 @@ const { outputImg: degenerateOutputImg, xDegeneracy, yDegeneracy } = require("./
 
 let revert;
 
-// default placeholder test
 describe("ScalarNoiseGenerator", function(){
 
   beforeEach(function(){
